@@ -9,8 +9,6 @@ from sklearn import metrics
 from sklearn import svm
 # from utils import *
 
-
-
 def Y_New(Y_in):
     cluster = np.unique(Y_in)
     Y = np.zeros((Y_in.shape[0], cluster.__len__()), dtype=int)
@@ -19,6 +17,7 @@ def Y_New(Y_in):
             if Y_in[i] == cluster[j]:
                 Y[i][j] = 1
     return Y, cluster
+
 
 def MBFeatures(array):
     n,p = array.shape
@@ -36,7 +35,7 @@ def MBFeatures(array):
     MB[np.abs(MB) >= 1] = 1
     return MB
     
-
+    
 def causal_structure_learning(X, lambda1=0.001, loss_type='l2', max_iter=100, h_tol=1e-8, rho_max=1e+16, w_threshold=0.3):
     """Solve min_W L(W; X)  s.t. h(W) = 0 using augmented Lagrangian.
 
