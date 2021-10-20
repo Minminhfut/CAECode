@@ -113,9 +113,9 @@ def causal_structure_learning(X, lambda1=0.001, loss_type='l2', max_iter=100, h_
         if h <= h_tol or rho >= rho_max:
             break
     W_est = _adj(w_est)
-    print(W_est)
+    # print(W_est)
     W_est[np.abs(W_est) < w_threshold] = 0
-    print(W_est)
+    # print(W_est)
     return W_est, h
 
 
@@ -165,7 +165,7 @@ def causal_autoencoder_two_layer(X_in, Y_in, learning_rate, num_steps, tol, num_
     x_true = X
     X_encoder_lable = tf.concat([X_encoder, Y], 1)
 
-
+    
     # prediction
     W = tf.Variable(tf.random_normal([num_hidden_2, 1]))
     b = tf.Variable(tf.random_normal([1]))
@@ -213,7 +213,6 @@ def causal_autoencoder_two_layer(X_in, Y_in, learning_rate, num_steps, tol, num_
             B = MBFeatures(Temp)
             Weight_P_in = np.copy(np.tile(np.transpose(B), (n,1)))
 
-     
     Encoder, w1, b1, w2, b2 = sess.run(
         [X_encoder, betas['encoder_h1'], biases['encoder_b1'], betas['encoder_h2'], biases['encoder_b2']],
         feed_dict={X: X_in, Y: Y_in, Weight_A: Weight_A_in})
